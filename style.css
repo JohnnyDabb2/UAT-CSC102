@@ -1,0 +1,45 @@
+
+* {
+  box-sizing: border-box;
+}
+
+.logo {
+  text-align: center;
+  font-family: "Tahoma";
+  font-size: 290%;
+  color: white;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a button {
+  width: 24.5%;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
+  background-color: blue;
+  padding: 16px;
+  border: 3px solid #777;
+  transition-duration: 0.3s;
+  font-size: 16px;
+  color: white;
+  font-family: customAngryBirds;
+}
+
+.navbar a button:hover {
+  background-color: lightblue;
+  padding: 13px;
+  cursor: pointer;
+  font-size:19px;
+}
+
+body {
+  background-color: blue;
+  font-family: Tahoma;
+  color: white;
+  text-align: center;
+}
