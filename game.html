@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Card Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .card {
+      width: 100px;
+      height: 150px;
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+      display: inline-block;
+      margin: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Memory Card Game</h1>
+  <div id="gameBoard"></div>
+
+  <script>
+    // Array to store card values
+    const cards = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E'];
+
+    let flippedCards = [];
+    let matchedCards = [];
+
+    // Shuffle cards
+    cards.sort(() => Math.random() - 0.5);
+
+    const gameBoard = document.getElementById('gameBoard');
+
+    // Create cards
+    cards.forEach((card, index) => {
+      const cardElement = document.createElement('div');
+      cardElement.classList.add('card');
+      cardElement.dataset.value = card;
+      cardElement.dataset.index = index;
+      cardElement.addEventListener('click', flipCard);
+      gameBoard.appendChild(cardElement);
+    });
+
+    // Flip card function
+    function flipCard() {
+      if (flippedCards.length < 2 && !flippedCards.includes(this)) {
+        this.innerHTML = this.dataset.value;
+        flippedCards.push(this);
+
+        if (flippedCards.length === 2) {
+          setTimeout(checkMatch, 1000);
+        }
+      }
+    }
+
+    // Check for matching cards
+    function checkMatch() {
+      if (flippedCards[0].dataset.value === flippedCards[1].dataset.value) {
+        flippedCards.forEach(card => {
+          card.removeEventListener('click', flipCard);
+          card.style.backgroundColor = '#99ff99';
+          matchedCards.push(card);
+        });
+      } else {
+        flippedCards.forEach(card => {
+          card.innerHTML = '';
+        });
+      }
+
+      flippedCards = [];
+
+      // Check if the game is over
+      if (matchedCards.length === cards.length) {
+        alert('Congratulations! You have won the game!');
+      }
+    }
+  </script>
+</body>
+</html>
